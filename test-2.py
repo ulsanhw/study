@@ -51,7 +51,7 @@ class Annimal():
     def sleep(self):
         pass
 
-    def reproduce(self):
+    def reproduce(self,annimal):
         pass
 
     def eat(self):
@@ -75,7 +75,11 @@ class Mammalia(Annimal):
     def eat(self,food):
         if(isinstance(food,Pisces)):
             food.die()
-                    
+    def reproduce(self,annimal):
+        if(isinstance(annimal,Mammalia)):
+            new_mammalia = Mammalia()
+            return(new_mammalia)
+                 
 class Pisces(Annimal):
     def eat(self,food):
         if(isinstance(food,Birds)):
@@ -95,52 +99,15 @@ class Earth():
     def __init__(self):
         self.animal=[]
     
-    def show_animals(self, animal_type="all"):
-        target = []
-        if (animal_type == "pisces"):
-            target = self.pisces
-        elif (animal_type == "mammalia"):
-            target = self.mammalia
-        elif (animal_type == "birds"):
-            target = self.birds
-        elif (animal_type == "reptiles"):
-            target = self.reptiles
-        if (animal_type == "all"):
-            print("There are", len(self.pisces), "pisces.")
-            #for animal in self.pisces:
-                #print(animal.introduce())
-            print("There are", len(self.mammalia), "mammalia.")
-           # for animal in self.mammalia:
-                #print(animal.introduce())
-            print("There are", len(self.birds), "birds.")
-           # for animal in self.birds:
-               # print(animal.introduce())
-            print("There are", len(self.reptiles), "reptiles.")
-           # for animal in self.reptiles:
-               # print(animal.introduce())
-        else:
-            for animal in self.target:
-                print(animal.introduce())
-                
             
     
     def add_annimal(self, annimal):
         # isinstance(인스턴스화 된 오브젝트, 검사하고싶은 클래스) == True / False
         # super 상위클래스를 바로 사용할수있는 접근인자 키워드
-        if ( isinstance(annimal, Pisces) ):
-            self.pisces.append(annimal)
-        
-        if ( isinstance(annimal, Mammalia) ):
-            self.mammalia.append(annimal)
-        
-        if ( isinstance(annimal, Birds) ):
-            self.birds.append(annimal)
-        
-        if ( isinstance(annimal, Reptiles) ):
-            self.reptiles.append(annimal)
+        self.animal.append(annimal)
 
     
-    def loop(self):
+    def reproduce_phase(self):
         if len(self.pisces) >= 2:
             new_fish = Pisces("fish")
             self.pisces.append(new_fish)
@@ -154,7 +121,7 @@ class Earth():
             new_reptiles = Reptiles("lizad")
             self.reptiles.append(new_reptiles)  
     
-    def loop_2(self):
+    def eat_phase(self):
         if len(self.pisces) >3:
             self.pisces.pop()
             print("물고기 사람이 잡아먹었다") 

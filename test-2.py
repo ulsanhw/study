@@ -44,38 +44,56 @@ import time
 # 클래스를 상속 받을때 마다 상위 클래스의 메서드 오버라이딩 한개 그리고 메서드 추가 한개를 해야한다
 
 class Annimal():
-    def __init__(self, name):
-        self.name = name
-        #self.age = age
+    def __init__(self):
+        self.__alive = True
+
     
-    def introduce(self):
-        print("hello my name is", self.name )
-    
+    def sleep(self):
+        pass
+
+    def reproduce(self):
+        pass
+
     def eat(self):
-        print(self.name , "is eating..")
+        pass
+    
+    def die(self):
+        self.__alive = False
+
+    def if_die(self):
+        if(self.__alive == True):
+            return(False)
+        
+        else:
+            return(True)
+    #def if_die(self):
+    #return (not self.__alive)
+
+
 
 class Mammalia(Annimal):
-     def produce(self):
-        print(self.name , "분만가능")
-
+    def eat(self,food):
+        if(isinstance(food,Pisces)):
+            food.die()
+                    
 class Pisces(Annimal):
-     def swimming(self):
-        print(self.name , "수영가능")
+    def eat(self,food):
+        if(isinstance(food,Birds)):
+            food.die()
 
 class Birds(Annimal):
-     def flying(self):
-         print(self.name , "비행가능")
+    def eat(self,food):
+        if(isinstance(food,Reptiles)):
+            food.die()
 
 class Reptiles(Annimal):
-     def metamorphosis(self):
-         print(self.name , "변태가능")
+    def eat(self,food):
+        if(isinstance(food,Mammalia)):
+            food.die()
 
 class Earth():
     def __init__(self):
-        self.pisces = []
-        self.mammalia = []
-        self.birds = []
-        self.reptiles = []
+        self.animal=[]
     
     def show_animals(self, animal_type="all"):
         target = []
@@ -135,6 +153,7 @@ class Earth():
         if len(self.reptiles) >= 2:
             new_reptiles = Reptiles("lizad")
             self.reptiles.append(new_reptiles)  
+    
     def loop_2(self):
         if len(self.pisces) >3:
             self.pisces.pop()

@@ -1,48 +1,5 @@
 import time
 
-# class Annimal():
-#     def __init__(self, name):
-#         self.name = name
-#     
-#     def sleep(self):
-#         print(self.name, "is sleeping...")
-#         
-#     def walk(self, distance):
-#         print(self.name, "is walking ", distance, "km.")
-#         
-# class Cat(Annimal):
-#     def walk(self, distance):
-#         print(self.name, "is walking fast", distance * 2, "km")
-#     
-#     def yaong(self):
-#         print(self.name, "say yaong")
-# 
-# class Dog(Annimal):
-#     def __init__(self):
-#         self.name = "toto"
-#     
-#     def wall(self):
-#         print(self.name, "say wall")
-#         
-#         
-# 동물
-# 
-# 포유류 어류 조류 파충류
-# 
-# 포유류
-# 인간 개 고래
-# 
-# 어류
-# 갈치  황태
-# 
-# 조류
-# 비둘기 참새
-# 
-# 파충류
-# 도마뱀 악어
-
-# 클래스를 상속 받을때 마다 상위 클래스의 메서드 오버라이딩 한개 그리고 메서드 추가 한개를 해야한다
-
 class Annimal():
     def __init__(self):
         self.__alive = True
@@ -56,7 +13,7 @@ class Annimal():
 
     def eat(self):
         pass
-    
+
     def die(self):
         self.__alive = False
 
@@ -84,17 +41,26 @@ class Pisces(Annimal):
     def eat(self,food):
         if(isinstance(food,Birds)):
             food.die()
-
+    def reproduce(self,annimal):
+        if(isinstance(annimal,Pisces)):
+            new_pisces = Pisces()
+            return(new_pisces)
 class Birds(Annimal):
     def eat(self,food):
         if(isinstance(food,Reptiles)):
             food.die()
-
+    def reproduce(self,annimal):
+        if(isinstance(annimal,Birds)):
+            new_birds = Birds()
+            return(new_birds)
 class Reptiles(Annimal):
     def eat(self,food):
         if(isinstance(food,Mammalia)):
             food.die()
-
+    def reproduce(self,annimal):
+        if(isinstance(annimal,Reptiles)):
+            new_reptiles = Reptiles()
+            return(new_reptiles)
 class Earth():
     def __init__(self):
         self.animal=[]
@@ -102,8 +68,6 @@ class Earth():
             
     
     def add_annimal(self, annimal):
-        # isinstance(인스턴스화 된 오브젝트, 검사하고싶은 클래스) == True / False
-        # super 상위클래스를 바로 사용할수있는 접근인자 키워드
         self.animal.append(annimal)
 
     

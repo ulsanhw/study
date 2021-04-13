@@ -63,41 +63,29 @@ class Reptiles(Annimal):
             return(new_reptiles)
 class Earth():
     def __init__(self):
-        self.animal=[]
-    
-            
+        self.animal=[]#4마리의 종류를 넣어놓는다.
     
     def add_annimal(self, annimal):
         self.animal.append(annimal)
 
     
-    def reproduce_phase(self):
-        if len(self.pisces) >= 2:
-            new_fish = Pisces("fish")
-            self.pisces.append(new_fish)
-        if len(self.mammalia) >= 2:
-            new_mammalia = Mammalia("mammalia")
-            self.mammalia.append(new_mammalia)
-        if len(self.birds) >= 2:
-            new_birds = Birds("birds")
-            self.birds.append(new_birds)
-        if len(self.reptiles) >= 2:
-            new_reptiles = Reptiles("lizad")
-            self.reptiles.append(new_reptiles)  
+    def reproduce_phase(self):#
+        for a in range(int(len(self.annimal)/2)):
+            self.add_annimal(self.annimal[a].reproduce(self.annimal[a+int(len(self.annimal)/2)]))
+        
     
     def eat_phase(self):
-        if len(self.pisces) >3:
-            self.pisces.pop()
-            print("물고기 사람이 잡아먹었다") 
-        if len(self.mammalia) >3:
-            self.mammalia.pop()
-            print("고래 사람이 잡아먹었다")
-        if len(self.birds) >3:
-            self.birds.pop()
-            print("새 사람이 잡아먹었다")
-        if len(self.reptiles) >3:
-            self.reptiles.pop()
-            print("파충류 사람이 잡아먹었다")
+        for a in range(int(len(self.annimal/2))):
+            self.annimal[a].eat(self.annimal[a+int(len(self.annimal)/2)]))
+    
+    def check(self):
+        pass
+
+    def loop(self):
+        while(True):
+            self.reproduce_phase()
+            self.eat_phase()
+            self.check()
                 
 earth = Earth()
 fish = Pisces("다금바리")
@@ -112,11 +100,7 @@ earth.add_annimal(sparrow)
 earth.add_annimal(sparrow)
 earth.add_annimal(lizard)
 earth.add_annimal(lizard)
-while (True):
-    time.sleep(1)
-    earth.loop()
-    earth.loop_2()
-    earth.show_animals()
+earth.loop()
 
 
 # 재귀함수

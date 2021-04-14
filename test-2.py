@@ -19,10 +19,10 @@ class Annimal():
 
     def if_die(self):
         if(self.__alive == True):
-            return(False)
+            return(False)#살아있다
         
         else:
-            return(True)
+            return(True)#죽어있다
     #def if_die(self):
     #return (not self.__alive)
 
@@ -63,10 +63,10 @@ class Reptiles(Annimal):
             return(new_reptiles)
 class Earth():
     def __init__(self):
-        self.animal=[]#4마리의 종류를 넣어놓는다.
+        self.annimal=[]#4마리의 종류를 넣어놓는다.
     
     def add_annimal(self, annimal):
-        self.animal.append(annimal)
+        self.annimal.append(annimal)
 
     
     def reproduce_phase(self):#
@@ -75,23 +75,27 @@ class Earth():
         
     
     def eat_phase(self):
-        for a in range(int(len(self.annimal/2))):
-            self.annimal[a].eat(self.annimal[a+int(len(self.annimal)/2)]))
+        for a in range(int(len(self.annimal)/2)):
+            self.annimal[a].eat(self.annimal[a+int(len(self.annimal)/2)])
     
-    def check(self):
-        pass
+    def check_die_annimal(self):
+        updated_annimal = [a for a in self.annimal if a.if_die() == False]
+        del self.annimal
+        self.annimal = updated_annimal
+
+
 
     def loop(self):
         while(True):
             self.reproduce_phase()
             self.eat_phase()
-            self.check()
+            self.check_die_annimal()
                 
 earth = Earth()
-fish = Pisces("다금바리")
-human = Mammalia("사람")
-sparrow = Birds("참새")
-lizard = Reptiles("도마뱀")
+fish = Pisces()
+human = Mammalia()
+sparrow = Birds()
+lizard = Reptiles()
 earth.add_annimal(fish)
 earth.add_annimal(fish)
 earth.add_annimal(human)

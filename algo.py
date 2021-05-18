@@ -1,3 +1,15 @@
+class Sort():
+    def __init__(self,my_list):
+        self.__my_list = my_list
+        self.__sorted_list = []
+    
+    def sort(self):
+        pass
+
+    def get_sorted_list(self):
+        return(self.__sorted_list)
+
+
 def bubble_sort(toto):
     for i in range(len(toto)):
         if(i < len(toto)-1 and toto[i] > toto[i+1]):
@@ -46,9 +58,36 @@ def selection_sort(toto_2):
         toto_2[i] , toto_2[n] = toto_2[n] , toto_2[i]
         
     return(toto_2)
-print(selection_sort([3,4,2,5,6,7,1]))
+#print(selection_sort([3,4,2,5,6,7,1]))
+
+
+def quick_sort(input_list):
+    if len(input_list) < 2:
+        return(input_list)
+    
+    pivot = input_list[0]
+    
+    less = [i for i in input_list if i < pivot]
+    more = [i for i in input_list if i > pivot]
+
+    input_list = quick_sort(less) + [pivot] + quick_sort(more)
+
+    return(input_list)
+
+print(quick_sort([3,4,2,5,6,7,1]))
+
+class Quick_sort(Sort):
+    def sort(self):
+        self.__sorted_list = quick_sort(self.__my_list)
+
+q = Quick_sort([3,4,7,6])
+q.sort()
+print(q.get_sorted_list())
+
+
+
 
 
         
-            
+          
 
